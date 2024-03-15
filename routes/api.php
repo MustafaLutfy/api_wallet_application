@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WalletController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\GoalController;
 
@@ -28,8 +27,10 @@ Route::post('login',[AuthController::class,'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('logout',[AuthController::class,'logout']);
-    Route::get('wallet',[WalletController::class,'index']);
     Route::post('transfer',[TransferController::class,'store']);
+    Route::get('transfer',[TransferController::class,'index']);
+    Route::get('transfer/{id}',[TransferController::class,'show']);
+
     Route::post('create/target',[GoalController::class,'store']);
     Route::get('user',[UserController::class,'index']);
 });

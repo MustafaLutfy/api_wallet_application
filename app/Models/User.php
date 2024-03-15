@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Wallet;
+
 
 class User extends Authenticatable
 {
@@ -45,14 +45,14 @@ class User extends Authenticatable
     ];
 
 
-    public function wallet(): HasOne
+    public function wallet()
     {
         return $this->hasOne(Wallet::class);
     }
 
-    public function goals(): hasMany
+    public function goals()
     {
         return $this->hasMany(Goal::class);
     }
-    
+
 }

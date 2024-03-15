@@ -13,7 +13,7 @@ class GoalController extends Controller
      */
     public function index()
     {
-        $myGoals = Goal::where('user_id', auth()->user())->get();
+        $myGoals = Goal::where('user_id', auth()->id())->get();
         return response()->json([
             'myGoals' => $myGoals,
         ]);
@@ -32,11 +32,13 @@ class GoalController extends Controller
      */
     public function store(Request $request)
     {
-        $goal = Goal::create([
+         Goal::create([
             'user_id' => auth()->user()->id,
             'target' => $request->target,
             'description'=> $request->description,
         ]);
+        // return 204 status code for an empty response
+        return response()->json(status : 204);
     }
 
     /**
