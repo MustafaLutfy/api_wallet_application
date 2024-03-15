@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('source_user_id')->constrained('users');
-            $table->foreignId('destination_user_id')->constrained('users');
+            $table->foreignId('source_user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('destination_user_id')->constrained('users')->cascadeOnDelete();
             $table->float('amount');
-            $table->enum('category', ['fixed_expenses', 'variable_expenses']);
+            $table->string('category');
             $table->string('transfer_type');
             $table->timestamps();
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->float('current_balance')->default(0);
             $table->float('total_income')->default(0);
             $table->float('total_expenses')->default(0);

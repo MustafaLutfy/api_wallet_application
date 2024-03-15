@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ExpenseCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTransferRequest extends FormRequest
 {
@@ -22,10 +24,12 @@ class StoreTransferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone'=>'required|string|min:11',
-            'amount'=>'required|string',
-            'category'=>'required',
-            'transfer_type'=>'required|string'
+            'phone'=> ['required', 'string', 'min:11'],
+            'amount'=> ['required', 'string'],
+            // use php enums for fixed values not database enums , easier to add value in future features
+            'category'=>['required',Rule::enum(ExpenseCategory::class)],
+            'transfer_type'=> ['required', 'string']
         ];
     }
+
 }
