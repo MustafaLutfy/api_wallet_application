@@ -66,8 +66,12 @@ class GoalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Goal $goal)
+    public function destroy($id)
     {
-        //
+        $goal = Goal::where('id' , $id)->get();
+
+        if($goal->user_id == auth()->user()->id){
+            $goal->delete();
+        }
     }
 }

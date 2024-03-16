@@ -19,19 +19,17 @@ use App\Http\Controllers\GoalController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('user',[UserController::class,'index']);
     Route::post('logout',[AuthController::class,'logout']);
     Route::get('wallet',[WalletController::class,'index']);
     Route::post('transfer',[TransferController::class,'store']);
     Route::post('create/target',[GoalController::class,'store']);
-    Route::get('user',[UserController::class,'index']);
+    Route::delete('delete/target/{id}',[GoalController::class,'store']);
 });
 
 
