@@ -9,9 +9,11 @@ class UserController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $user->load("wallet");
         return response()->json([
-            'user' => auth()->user(),
+            'user' => $user,
         ]);
     }
-   
+
 }
